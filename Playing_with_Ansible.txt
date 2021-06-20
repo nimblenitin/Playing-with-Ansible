@@ -1,0 +1,35 @@
+Installing Apache with Ansible on Local Host-
+
+-Installing Ansible:
+Use the below commands on Ubuntu system to install ansible software:
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible
+
+-Generating SSH keys and checking for connection to localhost:
+ssh-keygen -t rsa
+cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+ssh localhost "date"  
+
+-Adding the host localhost in ansible host file /etc/ansible/hosts:
+sudo vi /etc/ansible/hosts
+add below to the file:
+[webservers]
+localhost
+
+-Execute the below command to validate the host inventory file: 
+ansible -m ping web servers
+
+-Write Ansible YAML script to install Ansible software: 
+sudo vi apache2.yaml
+add the yaml commands as per the YAML file in Github
+
+-Run Ansible YAML script:
+ansible-playbook apache2.yaml
+
+-Validate installation using the command: 
+ansible -m shell  -a "service apache2 status" webservers
+
+
+
